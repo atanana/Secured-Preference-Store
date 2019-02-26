@@ -28,10 +28,10 @@ import java.security.KeyStoreException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
 import java.security.SecureRandom;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
-import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -118,7 +118,7 @@ public class EncryptionManager {
     private SecretKey macKey;
 
     private RSAPublicKey publicKey;
-    private RSAPrivateKey privateKey;
+    private PrivateKey privateKey;
 
     private String mKeyAliasPrefix;
 
@@ -833,7 +833,7 @@ public class EncryptionManager {
         if (mStore.containsAlias(RSA_KEY_ALIAS) && mStore.entryInstanceOf(RSA_KEY_ALIAS, KeyStore.PrivateKeyEntry.class)) {
             KeyStore.PrivateKeyEntry entry = (KeyStore.PrivateKeyEntry) mStore.getEntry(RSA_KEY_ALIAS, null);
             publicKey = (RSAPublicKey) entry.getCertificate().getPublicKey();
-            privateKey = (RSAPrivateKey) entry.getPrivateKey();
+            privateKey = entry.getPrivateKey();
         }
     }
 
